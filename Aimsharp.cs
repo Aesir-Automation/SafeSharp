@@ -10,9 +10,22 @@ namespace SafeSharp
     /// </summary>
     public static class Aimsharp
     {
-        private static readonly int _defaultInt = -1;
-        private static readonly float _defaultFloat = -1f;
-        private static readonly bool _defaultBool = false;
+        private static int _defaultInt = -1;
+        private static float _defaultFloat = -1f;
+        private static bool _defaultBool = false;
+
+        /// <summary>
+        /// Configures the default values to return in case of an exception.
+        /// </summary>
+        /// <param name="defaultInt">Default value -1</param>
+        /// <param name="defaultFloat">Default value -1</param>
+        /// <param name="defaultBool">Default value false</param>
+        public static void ConfigureDefaults(int defaultInt, float defaultFloat, bool defaultBool)
+        {
+            _defaultInt = defaultInt;
+            _defaultFloat = defaultFloat;
+            _defaultBool = defaultBool;
+        }
 
         /// <summary>
         /// Executes a function with exception handling.

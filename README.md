@@ -9,22 +9,18 @@ SafeSharp is a .NET Standard 2.0 library that provides exception-safe wrappers a
 - **Thread-Safe Logging**: File writes are thread-safe, preventing concurrent write issues when multiple threads log simultaneously.
 - **Easy Integration**: Designed to be a drop-in replacement for direct Aimsharp API calls with minimal changes to your existing codebase.
 - **XML Documentation**: All methods include XML documentation, providing IntelliSense support and enhancing code readability.
+- **Configurable Settings**: Static classes now offer methods to configure default values and logging behavior.
 
 ## Installation
 
 1. **Clone the Repository**
-
    ```bash
    git clone https://github.com/yourusername/safesharp.git
    ```
-
 2. **Include the Project**
-
    - Add the `SafeSharp` project to your solution.
    - Alternatively, compile the project and reference the resulting DLL in your application.
-
 3. **Add References**
-
    - Ensure your project references the necessary assemblies:
      - `System`
      - `System.IO`
@@ -33,6 +29,17 @@ SafeSharp is a .NET Standard 2.0 library that provides exception-safe wrappers a
 ## Usage
 
 Here's how you can use the `Aimsharp` and `Logging` classes in your application:
+
+### Configuring Default Values
+
+Before using the Aimsharp wrapper, you can configure the default values to be returned in case of exceptions:
+
+```csharp
+using SafeSharp;
+
+// Configure default values
+Aimsharp.ConfigureDefaults(defaultInt: 0, defaultFloat: 0f, defaultBool: false);
+```
 
 ### Using the Static Aimsharp Wrapper
 
@@ -47,7 +54,6 @@ public class MyRotation
         {
             Aimsharp.Cast("Fireball");
         }
-
         int playerHealth = Aimsharp.Health();
         if (playerHealth < 50)
         {
@@ -55,6 +61,17 @@ public class MyRotation
         }
     }
 }
+```
+
+### Configuring Logging
+
+You can configure the logging behavior:
+
+```csharp
+using SafeSharp;
+
+// Configure logging settings
+Logging.Configure(logToAimsharp: true, logToFile: true);
 ```
 
 ### Logging Errors

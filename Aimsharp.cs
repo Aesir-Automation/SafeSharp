@@ -88,6 +88,18 @@ namespace SafeSharp
         /// Should only be used in Initialize or for debugging since printing every tick can be slow.
         /// </summary>
         /// <param name="text">The text to print.</param>
+        public static void PrintMessage(string text)
+        {
+            ExecuteWithExceptionHandling(
+                () => AS.PrintMessage(text),
+                $"Failed to print message: '{text}'.");
+        }
+
+        /// <summary>
+        /// Prints a message to the bot's console box.
+        /// Should only be used in Initialize or for debugging since printing every tick can be slow.
+        /// </summary>
+        /// <param name="text">The text to print.</param>
         /// <param name="color">The color of the text.</param>
         public static void PrintMessage(string text, Color color)
         {
@@ -538,7 +550,7 @@ namespace SafeSharp
         /// </summary>
         /// <param name="unit">The unit to check. Defaults to "target".</param>
         /// <returns></returns>
-        public static int LastCastId(string unit = "target")
+        public static int LastCastID(string unit = "target")
         {
             return ExecuteWithExceptionHandling(
                 () => AS.LastCastID(unit),

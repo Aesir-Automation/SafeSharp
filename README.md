@@ -26,6 +26,51 @@ SafeSharp is a .NET Standard 2.0 library that provides exception-safe wrappers a
 
 Here's how you can use the `Aimsharp` and `Logging` classes in your application:
 
+### Example Rotation Usage
+
+SafeSharp is designed to be a drop-in replacement for the Aimsharp API. Here's an example of how you can use the `Aimsharp` wrapper in your rotation:
+
+```csharp
+using SafeSharp;
+// using AimsharpWow.API; We don't need this anymore, so it's commented out. You can remove it entirely if you want.
+
+namespace AimsharpWow.Modules
+{
+    public class Asbru : Rotation
+    {
+        public Asbru()
+        {
+            Aimsharp.PrintMessage("Constructor");
+        }
+
+        public override void LoadSettings()
+        {
+            Aimsharp.PrintMessage("LoadSettings");
+        }
+
+        public override void Initialize()
+        {
+            Aimsharp.PrintMessage("Initialize");
+        }
+
+        public override bool CombatTick()
+        {
+            return false;
+        }
+
+        public override bool OutOfCombatTick()
+        {
+            return false;
+        }
+
+        public override bool MountedTick()
+        {
+            return false;
+        }
+    }
+}
+```
+
 ### Configuring Default Values
 
 Before using the Aimsharp wrapper, you can configure the default values to be returned in case of exceptions:

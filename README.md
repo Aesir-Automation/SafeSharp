@@ -13,18 +13,14 @@ SafeSharp is a .NET Standard 2.0 library that provides exception-safe wrappers a
 
 ## Installation
 
-1. **Clone the Repository**
-   ```bash
-   git clone https://github.com/yourusername/safesharp.git
-   ```
+1. **Download the Release**
+   - Place the `SafeSharp.dll` and `netstandard.dll` file in your Aimsharp `Bin` directory.
 2. **Include the Project**
-   - Add the `SafeSharp` project to your solution.
-   - Alternatively, compile the project and reference the resulting DLL in your application.
+   - Add the `SafeSharp` dependency to your solution.
+   - Alternatively, clone this repo and compile the project and reference the resulting DLL in your application.
 3. **Add References**
    - Ensure your project references the necessary assemblies:
-     - `System`
-     - `System.IO`
-     - Any other dependencies required by the Aimsharp API.
+     - `using SafeSharp`
 
 ## Usage
 

@@ -534,6 +534,19 @@ namespace SafeSharp
         }
 
         /// <summary>
+        /// Returns the last WoW spell ID the unit cast successfully.
+        /// </summary>
+        /// <param name="unit">The unit to check. Defaults to "target".</param>
+        /// <returns></returns>
+        public static int LastCastId(string unit = "target")
+        {
+            return ExecuteWithExceptionHandling(
+                () => AS.LastCastID(unit),
+                $"Failed to get last casted spell ID for unit '{unit}'.",
+                _defaultInt);
+        }
+
+        /// <summary>
         /// Returns true if the unit is currently interruptible.
         /// </summary>
         /// <param name="unit">The unit to check. Defaults to "target".</param>
@@ -726,7 +739,21 @@ namespace SafeSharp
         }
 
         /// <summary>
-        /// Returns true if the specified talent is selected.
+        /// Returns true if the specified talent is selected. Does not work in Retail WoW! For retail, use the talent ID instead.
+        /// </summary>
+        /// <param name="row">The row in the talent tree.</param>
+        /// <param name="column">The column in the talent tree.</param>
+        /// <returns></returns>
+        public static bool Talent(int row, int column)
+        {
+             return ExecuteWithExceptionHandling(
+                () => AS.Talent(row, column),
+                $"Failed to check if talent at row '{row}' and column '{column}' is selected.",
+                _defaultBool);
+}
+
+        /// <summary>
+        /// Returns true if the specified talent is selected. Only works for Retail WoW! For other flavors, use the row and column instead.
         /// </summary>
         /// <param name="talentId">The talent ID to check.</param>
         public static bool Talent(int talentId)
@@ -998,6 +1025,32 @@ namespace SafeSharp
         }
 
         /// <summary>
+        /// Returns the cooldown remaining in milliseconds for the equipped trinket.
+        /// </summary>
+        /// <param name="slot">The trinket slot (0 for top slot, 1 for bottom slot).</param>
+        /// <returns></returns>
+        public static int TrinketCooldown(int slot)
+        {
+            return ExecuteWithExceptionHandling(
+                () => AS.TrinketCooldown(slot),
+                $"Failed to get cooldown for trinket in slot {slot}.",
+                _defaultInt);
+        }
+
+        /// <summary>
+        /// Returns true if the trinket in the specified slot is enabled.
+        /// </summary>
+        /// <param name="slot">The trinket slot (0 for top slot, 1 for bottom slot).</param>
+        /// <returns></returns>
+        public static bool TrinketEnabled(int slot)
+        {
+            return ExecuteWithExceptionHandling(
+                () => AS.TrinketEnabled(slot),
+                $"Failed to check if trinket in slot {slot} is enabled.",
+                _defaultBool);
+        }
+
+        /// <summary>
         /// Returns the diminishing returns level of a CC category on an enemy unit.
         /// </summary>
         /// <param name="unit">The enemy unit (e.g., "arena1").</param>
@@ -1183,13 +1236,25 @@ namespace SafeSharp
         }
 
         /// <summary>
-        /// Grabs an ID used for rotation license generation.
+        /// Returns an ID used for rotation license generation. This may not be unique for users with pirated copies of Windows.
         /// </summary>
         public static string GetAimsharpID()
         {
             return ExecuteWithExceptionHandling(
                 () => AS.GetAimsharpID(),
                 "Failed to get Aimsharp ID.",
+                string.Empty);
+        }
+
+        /// <summary>
+        /// Returns an ID that is unique to the user's hardware.
+        /// </summary>
+        /// <returns></returns>
+        public static string GetHWID()
+        {
+            return ExecuteWithExceptionHandling(
+                () => AS.GetHWID(),
+                "Failed to get HWID.",
                 string.Empty);
         }
 
@@ -1219,6 +1284,31 @@ namespace SafeSharp
                 () => AS.DebuffInfoDetailed(unit, debuffName, byPlayer),
                 $"Failed to get detailed debuff info for '{debuffName}' on unit '{unit}'.",
                 new List<Dictionary<string, int>>());
+        }
+
+        /// <summary>
+        /// Checks if the custom code is toggled on.
+        /// </summary>
+        /// <param name="code">The name of the custom code. Defined in CustomCommands.Add("example") during the Initialize() method in your rotation file.</param>
+        /// <returns></returns>
+        public static bool IsCustomCodeOn(string code)
+        {
+            return ExecuteWithExceptionHandling(
+                () => AS.IsCustomCodeOn(code),
+                $"Failed to check if custom code '{code}' is on.",
+                _defaultBool);
+        }
+
+        /// <summary>
+        /// Checks if the chat window is open and focused.
+        /// </summary>
+        /// <returns></returns>
+        public static bool IsChatClosed()
+        {
+            return ExecuteWithExceptionHandling(
+                () => AS.IsChatClosed(),
+                "Failed to check if chat is closed.",
+                _defaultBool);
         }
     }
 }

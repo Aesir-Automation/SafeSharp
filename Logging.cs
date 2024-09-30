@@ -19,7 +19,7 @@ namespace SafeSharp
         {
             try
             {
-                string logDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Logs");
+                string logDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SafeSharp");
                 if (!Directory.Exists(logDirectory))
                 {
                     Directory.CreateDirectory(logDirectory);
@@ -28,7 +28,7 @@ namespace SafeSharp
                 string logFileName = GetLogFileName();
                 string logFilePath = Path.Combine(logDirectory, logFileName);
 
-                string logMessage = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff} [ERROR] {message}";
+                string logMessage = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff} {message}";
 
                 lock (_lock)
                 {
